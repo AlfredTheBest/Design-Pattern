@@ -18,3 +18,41 @@
 * 字的排列其实可能是竖排也可能是横排，此时只需要将活字移动就可以做到满足排列需求，此是灵活性好
 
 面对对象的分析设计编程思想，通过封装，继承多态把程序的耦合度降低，传统印刷术的问题就在于所有的字都刻在同一版面上造成耦合度太高所致，开始用设计模式使得程序更加灵活，易于修改，易于复用。
+
+##简单工厂模式
+例：计算器，到底要实例化谁，将来会不会增加实例化的对象，把很容易变化的地方用一个单独的类来做这个创造实例的过程，这个就是工厂。
+简单的运算工厂类
+
+    public class OperationFactory
+    {
+    	public static operation createOperate(string operate)
+    	{
+    	Operation oper = null;
+    	switch (operate)
+    	{
+    		case "+":
+    			oper = new OperationAdd();
+    			break;
+    		case "-":
+    			oper = new OperationSub();
+    			break;
+    		case "*":
+    			oper = new OperationMul();
+    			break;
+    		case "/":
+    			oper = new OperationDiv();
+    			break;
+    	}
+    	return oper;
+    	}
+    }
+    
+客户端代码
+
+    Operation oper;
+    oper = OperationFactory.createOperate("+");
+    oper.NumberA = 1;
+    oper.NumberB = 2;
+    double result = oper.GetResult();
+
+这样，以后需要增加各种复杂运算，比如平方根，立方根，自然对数等等，只要增加相对应的运算子类就可以了。

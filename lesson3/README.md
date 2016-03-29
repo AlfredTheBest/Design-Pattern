@@ -58,12 +58,12 @@ HttpStack中这个函数的职责就是执行网络请求并且返回一个Respo
 ###示例
 
 还是以HttpStack为例，Volley定义了HttpStack来表示执行网络请求这个抽象概念。在执行网络请求时，我们只需要定义一个HttpStack对象，然后调用performRequest即可。至于HttpStack的具体实现由更高层的调用者给出。示例如下 :
-
-    public static RequestQueue newRequestQueue(Context context, HttpStack stack) {
+```
+  public static RequestQueue newRequestQueue(Context context, HttpStack stack) {
       File cacheDir = new File(context.getCacheDir(), DEFAULT_CACHE_DIR);
       String userAgent = "volley/0";
 		// 代码省略
-    // 1、构造HttpStack对象
+// 1、构造HttpStack对象
       if (stack == null) {
           if (Build.VERSION.SDK_INT >= 9) {
               stack = new HurlStack();
@@ -73,20 +73,22 @@ HttpStack中这个函数的职责就是执行网络请求并且返回一个Respo
               stack = new HttpClientStack(AndroidHttpClient.newInstance(userAgent));
           }
       }
-    // 2、将HttpStack对象传递给Network对象
+// 2、将HttpStack对象传递给Network对象
       Network network = new BasicNetwork(stack);
-    // 3、将network对象传递给网络请求队列
+// 3、将network对象传递给网络请求队列
       RequestQueue queue = new RequestQueue(new DiskBasedCache(cacheDir), network);
       queue.start();
       return queue;
-     }
+  }
+```
      
  BasicNetwork的代码如下:
 
-    /**
-     * A network performing Volley requests over an {@link     HttpStack}.
-     */
-    public class BasicNetwork implements Network {
+```
+/**
+ * A network performing Volley requests over an {@link HttpStack}.
+ */
+public class BasicNetwork implements Network {
 	// HttpStack抽象对象
     protected final HttpStack mHttpStack;
     protected final ByteArrayPool mPool;
@@ -95,12 +97,12 @@ HttpStack中这个函数的职责就是执行网络请求并且返回一个Respo
     }
     
     
-     public BasicNetwork(HttpStack httpStack, ByteArrayPool pool) {
-         mHttpStack = httpStack;
-         mPool = pool;
-     }
+    public BasicNetwork(HttpStack httpStack, ByteArrayPool pool) {
+        mHttpStack = httpStack;
+        mPool = pool;
     }
-    
+}
+```
 上述代码中，BasicNetwork构造函数依赖的是HttpStack抽象接口，任何实现了HttpStack接口的类型都可以作为参数传递给BasicNetwork用以执行网络请求。这就是所谓的里氏替换原则，任何父类出现的地方子类都可以出现，这不就保证了可扩展性吗？
 
 ###减少LSP妨碍

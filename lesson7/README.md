@@ -27,12 +27,13 @@ Software entities (classes, modules, functions, etc.) should be open for extensi
 
 例如我们返回的数据格式是Json，那么我们使用JsonObjectRequest请求来获取数据，它会将结果转成JsonObject对象，我们看看JsonObjectRequest的核心实现。
 
-	/**
-     * A request for retrieving a {@link JSONObject} response body at a given URL, allowing for an
-     * optional {@link JSONObject} to be passed in as part of the request body.
-     */
-    public class JsonObjectRequest extends JsonRequest<JSONObject> {
-       // 代码省略
+```
+/**
+ * A request for retrieving a {@link JSONObject} response body at a given URL, allowing for an
+ * optional {@link JSONObject} to be passed in as part of the request body.
+ */
+public class JsonObjectRequest extends JsonRequest<JSONObject> {
+   // 代码省略
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
         try {
@@ -46,17 +47,19 @@ Software entities (classes, modules, functions, etc.) should be open for extensi
             return Response.error(new ParseError(je));
         }
     }
-	}
+}
+```	
+	
 JsonObjectRequest通过实现Request抽象类的parseNetworkResponse解析服务器返回的结果，这里将结果转换为JSONObject，并且封装到Response类中。
 
 例如Volley添加对图片请求的支持，即ImageLoader( 已内置 )。这个时候我的请求返回的数据是Bitmap图片。因此我需要在该类型的Request得到的结果是Request，但支持一种数据格式不能通过修改源码的形式，这样可能会为旧代码引入错误。但是你又需要支持新的数据格式，此时我们的开闭原则就很重要了，对扩展开放，对修改关闭。我们看看Volley是如何做的。
 
-
-    /**
-     * A canned request for getting an image at a given URL and calling
-     * back with a decoded Bitmap.
-    */
-    public class ImageRequest extends Request<Bitmap> {
+```
+/**
+ * A canned request for getting an image at a given URL and calling
+ * back with a decoded Bitmap.
+ */
+public class ImageRequest extends Request<Bitmap> {
 	// 代码省略
 	// 将结果解析成Bitmap，并且封装套Response对象中
     @Override
@@ -85,6 +88,7 @@ JsonObjectRequest通过实现Request抽象类的parseNetworkResponse解析服务
             return Response.success(bitmap, HttpHeaderParser.parseCacheHeaders(response));
         }
     }
-	}
+}
+```
 	
 需要添加某种数据格式的Request时，只需要继承自Request类，并且实现相应的方法即可。这样通过扩展的形式来应对软件的变化或者说用户需求的多样性，即避免了破坏原有系统，又保证了软件系统的可扩展性。

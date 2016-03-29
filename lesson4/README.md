@@ -14,71 +14,81 @@
 
 依赖倒置原则的核心思想是面向接口编程，我们依旧用一个例子来说明面向接口编程比相对于面向实现编程好在什么地方。场景是这样的，母亲给孩子讲故事，只要给她一本书，她就可以照着书给孩子讲故事了。代码如下：
 
-    
-    class Book{  
+```
+
+class Book{  
     public String getContent(){  
         return "很久很久以前有一个阿拉伯的故事……";  
     }  
-	}  
+}  
   
-	class Mother{  
+class Mother{  
     public void narrate(Book book){  
         System.out.println("妈妈开始讲故事");  
         System.out.println(book.getContent());  
     }  
-	}  
+}  
   
-	public class Client{  
+public class Client{  
     public static void main(String[] args){  
         Mother mother = new Mother();  
         mother.narrate(new Book());  
     }  
-	} 
+}  
+```
 	
 	
 运行良好，假如有一天，需求变成这样：不是给书而是给一份报纸，让这位母亲讲一下报纸上的故事，报纸的代码如下：
 
-	class Newspaper{  
+```
+class Newspaper{  
     public String getContent(){  
         return "林书豪38+7领导尼克斯击败湖人……";  
     }  
-	}  
+}  
+```
 	
 	
 这位母亲却办不到，因为她居然不会读报纸上的故事，这太荒唐了，只是将书换成报纸，居然必须要修改Mother才能读。假如以后需求换成杂志呢？换成网页呢？还要不断地修改Mother，这显然不是好的设计。原因就是Mother与Book之间的耦合性太高了，必须降低他们之间的耦合度才行。
 我们引入一个抽象的接口IReader。读物，只要是带字的都属于读物：
 
-	interface IReader{  
+```
+interface IReader{  
     public String getContent();  
-	} 
-	 
+}  
+
+```	
+ 
 Mother类与接口IReader发生依赖关系，而Book和Newspaper都属于读物的范畴，他们各自都去实现IReader接口，这样就符合依赖倒置原则了，代码修改为：
 
-	class Newspaper implements IReader {  
+```
+
+class Newspaper implements IReader {  
     public String getContent(){  
         return "林书豪17+9助尼克斯击败老鹰……";  
     }  
-	}  
-	class Book implements IReader{  
+}  
+class Book implements IReader{  
     public String getContent(){  
         return "很久很久以前有一个阿拉伯的故事……";  
     }  
-	}  
+}  
   
-	class Mother{  
+class Mother{  
     public void narrate(IReader reader){  
         System.out.println("妈妈开始讲故事");  
         System.out.println(reader.getContent());  
     }  
-	}  
-
-	public class Client{  
+}  
+  
+public class Client{  
     public static void main(String[] args){  
         Mother mother = new Mother();  
         mother.narrate(new Book());  
         mother.narrate(new Newspaper());  
     }  
-	}  
+}  
+```
 
 这样修改后，无论以后怎样扩展Client类，都不需要再修改Mother类了。这只是一个简单的例子，实际情况中，代表高层模块的Mother类将负责完成主要的业务逻辑，一旦需要对它进行修改，引入错误的风险极大。所以遵循依赖倒置原则可以降低类之间的耦合性，提高系统的稳定性，降低修改程序造成的风险。
  

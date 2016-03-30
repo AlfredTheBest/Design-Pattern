@@ -13,3 +13,4 @@
 * Leeson 7 [开闭原则](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson7)
 * Leeson 8 [修饰模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson8)
 * Leeson 9 [代理模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson9)
+* Leeson 10 [工厂方法模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson10)

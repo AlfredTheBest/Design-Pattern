@@ -16,3 +16,4 @@
 * Leeson 10 [工厂方法模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson10)
 * Leeson 11 [原型模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson11)
 * Leeson 12 [模版方法模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson12)
+* Leeson 13 [外观模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson13)

@@ -19,3 +19,4 @@
 * Leeson 13 [外观模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson13)
 * Leeson 14 [建造者模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson14)
 * Leeson 15 [观察者模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson15)
+* Leeson 16 [抽象工厂模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson16)

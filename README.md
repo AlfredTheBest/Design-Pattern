@@ -22,3 +22,4 @@
 * Leeson 16 [抽象工厂模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson16)
 * Leeson 17 [状态模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson17)
 * Leeson 18 [适配器模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson18)
+* Leeson 19 [备忘录模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson19)

@@ -26,3 +26,4 @@
 * Leeson 20 [组合模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson20)
 * Leeson 21 [单例模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson21)
 * Leeson 22 [桥接模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson22)
+* Leeson 23 [命令模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson23)

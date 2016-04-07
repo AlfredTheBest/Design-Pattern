@@ -342,6 +342,68 @@ static void Main(string[] args)
 
 责任链模式是一种对象的行为模式【GOF95】。在责任链模式里，很多对象由每一个对象对其下家的引用而连接起来形成一条链。请求在这个链上传递，直到链上的某一个对象决定处理此请求。发出这个请求的客户端并不知道链上的哪一个对象最终处理这个请求，这使得系统可以在不影响客户端的情况下动态地重新组织链和分配责任。
 
+###门框夹核桃
+
+职责链模式想要做到的事情其实就是把多个函数链起来调用。
+
+该模式提出的时候FP并不如今日盛行，其作者选用类来包装需要被链接的多个函数，这无可厚非。
+
+无论是class，还是function，都是为程序员提供抽象的手段。当我们想要链接的东西就是多个function，选择直接用function而非class就会显得更加自然，也更加轻量且合适。
+
+```
+object Loggers {
+  val ERR = 3
+  val NOTICE = 5
+  val DEBUG = 7
+
+  case class Event(message: String, priority: Int)
+
+  type Logger = Event => Event
+
+  def stdOutLogger(mask: Int): Logger = event => handleEvent(event, mask) {
+    println(s"Writing to stdout: ${event.message}")
+  }
+
+  def emailLogger(mask: Int): Logger = event => handleEvent(event, mask) {
+    println(s"Sending via e-mail: ${event.message}")
+  }
+
+  def stdErrLogger(mask: Int): Logger = event => handleEvent(event, mask) {
+    System.err.println(s"Sending to stderr: ${event.message}")
+  }
+
+  private def handleEvent(event: Event, mask: Int)(handler: => Unit) = {
+    if (event.priority <= mask) handler
+    event
+  }
+}
+```
+三个log的的等级ERR，NOTICE和DEBUG和之前Java的实现是一样的。
+
+一个case class Event，用来包裹需要被log的事件。
+
+type Logger则是声明了一个函数签名，凡是符合这个签名的函数都可以作为logger被使用。
+
+然后便是三个函数实现，它们将mask通过闭包封进函数内。这三个函数共同依赖一个私有handleEvent函数，其作用和Java代码中的message类似，判断mask和正在发生的事件之间优先级大小关系，并以此决定当前logger是否需要处理该事件。
+
+哎？等一下，这个是职责链模式啊，那个啥，链在哪儿呢？
+
+```
+object ChainRunner {
+
+  import chain.Loggers._
+
+  def main(args: Array[String]) {
+    val chain = stdOutLogger(DEBUG) andThen emailLogger(NOTICE) andThen stdErrLogger(ERR)
+
+    chain(Event("Entering function y.", DEBUG))
+    chain(Event("Step1 completed.", NOTICE))
+    chain(Event("An error has occurred.", ERR))
+  }
+}
+```
+
+以上代码中的andThen就可以把三个logger链在一起。
 
 
 

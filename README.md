@@ -28,3 +28,4 @@
 * Leeson 22 [桥接模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson22)
 * Leeson 23 [命令模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson23)
 * Leeson 24 [责任链模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson24)
+* Leeson 25 [中介者模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson25)

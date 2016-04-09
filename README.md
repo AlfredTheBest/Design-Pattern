@@ -30,3 +30,4 @@
 * Lesson 24 [责任链模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson24)
 * Lesson 25 [中介者模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson25)
 * Lesson 26 [享元模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson26)
+* Lesson 27 [解释器模式](https://github.com/AlfredTheBest/Design-Pattern/tree/master/lesson27)

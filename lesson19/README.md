@@ -1,5 +1,5 @@
-#备忘录模式(Memento Pattern)
-##简介
+# 备忘录模式(Memento Pattern)
+## 简介
 
 
 备忘录模式有两个目标：

@@ -22,7 +22,7 @@
 ## 简单工厂模式
 例：计算器，到底要实例化谁，将来会不会增加实例化的对象，把很容易变化的地方用一个单独的类来做这个创造实例的过程，这个就是工厂。
 简单的运算工厂类
-
+``` Java
     public class OperationFactory
     {
     	public static operation createOperate(string operate)
@@ -46,13 +46,13 @@
     	return oper;
     	}
     }
-    
+``` 
 客户端代码
-
+``` Java
     Operation oper;
     oper = OperationFactory.createOperate("+");
     oper.NumberA = 1;
     oper.NumberB = 2;
     double result = oper.GetResult();
-
+```
 这样，以后需要增加各种复杂运算，比如平方根，立方根，自然对数等等，只要增加相对应的运算子类就可以了。

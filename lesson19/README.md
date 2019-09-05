@@ -15,7 +15,7 @@
 
 Originator(发起人)：负责创建一个备忘录Memeto，用以记录当前时刻它的内部状态，并可以使用备忘录恢复内部状态。Originator可根据需要决定Memento储存Originator的哪些状态。
 
-Memeto(备忘录)：负责存储Originator对象的内部状态，并可防止Originator意外的其它对象访问备忘录Memeto。备忘录有两个接口，Creataker只能看到备忘录的窄接口，它只能将备忘录传递给其它对象。Originator只能看到一个窄接口，允许它访问返回到先前状态所需的所有数据。
+Memeto(备忘录)：负责存储Originator对象的内部状态，并可防止Originator以外的其它对象访问备忘录Memeto。备忘录有两个接口，Caretaker只能看到备忘录的窄接口，它只能将备忘录传递给其它对象。Originator只能看到一个窄接口，允许它访问返回到先前状态所需的所有数据。
 
 Caretaker(管理者)：负责保存好备忘录Memeto，不能对备忘录的内容进行操作或检查。
 
